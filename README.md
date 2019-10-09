@@ -95,7 +95,8 @@ RAM: ansible_memtotal_mb
 {{ var (+, -, *, /) number }}
 ```
 **Монтирование диска и создание разделов**
-```
+```yml
+
 fdisk /dev/sdb
 pvcreate /dev/sdb1
 vgcreate monitoring /dev/sdb1
