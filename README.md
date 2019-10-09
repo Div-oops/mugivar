@@ -2,31 +2,40 @@
 [SQL](https://div-oops.github.io/mugivar/SQL/)
 
 **nmap**
-```
+```yml
 
 Доступные ip в подсети
 nmap -v -sn -n 172.18.200.0/24 -oG -
 
 ```
 **ports**
-```bash
+```yml
+
 netstat -tlnp
+
 ```
 **Установленные пакеты**
-```bash
+```yml
+
 rpm -qa|grep <packadge_name>
+
 ```
 **rsync**
-```bash
+```yml
+
 rsync --archive --verbose --progress <имя пользователя>@<ip адрес>:<путь к папке или файлу на серваке> <путь к файлу или папке на твоём серваке>
+
 ```
 **scp**
-```bash
+```yml
+
 $ scp user@remote.host:file.txt /some/local/directory
 $ scp file.txt user@remote.host:/some/remote/directory
+
 ```
 **ssh web**
-```bash
+```yml
+
 sudo vim ~/.bash_profile 
 
 grafana_server()
@@ -41,6 +50,7 @@ localhost:3000
 ```
 **nginx subPath kibana or grafana**
 ```yml
+
 /etc/nginx/conf.d/name.conf
 
 server {
@@ -78,7 +88,8 @@ root_url = %(protocol)s://%(domain)s/sed/grafana/
 
 ```
 **Ansible vars**
-```
+```yml
+
 CPU: ansible_processor_vcpus
 RAM: ansible_memtotal_mb
 {{ var (+, -, *, /) number }}
@@ -93,4 +104,5 @@ mkfs.xfs /dev/mapper/monitoring-lv_monitoring
 mkdir /mnt/monitoring
 #/etc/fstab
 /dev/mapper/monitoring-lv_monitoring            /mnt/monitoring         xfs     defaults        0 0
+
 ```
