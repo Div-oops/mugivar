@@ -3,28 +3,30 @@
 
 **nmap**
 ```
+
 Доступные ip в подсети
 nmap -v -sn -n 172.18.200.0/24 -oG -
+
 ```
 **ports**
-```
+```bash
 netstat -tlnp
 ```
 **Установленные пакеты**
-```
+```bash
 rpm -qa|grep <packadge_name>
 ```
 **rsync**
-```
+```bash
 rsync --archive --verbose --progress <имя пользователя>@<ip адрес>:<путь к папке или файлу на серваке> <путь к файлу или папке на твоём серваке>
 ```
 **scp**
-```
+```bash
 $ scp user@remote.host:file.txt /some/local/directory
 $ scp file.txt user@remote.host:/some/remote/directory
 ```
 **ssh web**
-```
+```bash
 sudo vim ~/.bash_profile 
 
 grafana_server()
@@ -38,7 +40,7 @@ localhost:3000
 
 ```
 **nginx subPath kibana or grafana**
-```
+```yml
 /etc/nginx/conf.d/name.conf
 
 server {
