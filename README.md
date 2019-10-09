@@ -1,4 +1,7 @@
-#                                          [Home](https://div-oops.github.io/mugivar)    
+---
+permalink: /index.html
+---
+# [Home](https://div-oops.github.io/mugivar)  [Installers](https://div-oops.github.io/mugivar/installers)  
 [SQL](https://div-oops.github.io/mugivar/SQL/)
 
 **nmap**
