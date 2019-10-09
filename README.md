@@ -1,37 +1,97 @@
-## Welcome to GitHub Pages
-[hello](https://github.com/Div-oops/mugivar/blob/master/index.md)
-You can use the [editor on GitHub](https://github.com/Div-oops/mugivar/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+### Полезные ссылки
+## SQL:
+[PostgreSQL: справочник по командам psql, pg_dump, pg_restore](https://proft.me/2013/06/9/postgresql-spravochnik-po-komandam-psql-pg_dump/)
+[Полезные команды MySQL](http://gentooway.ru/2009/11/poleznye-komandy-mysql#comments)
+[mysql: полезные команды и настройки](https://proft.me/2011/07/19/mysql-poleznye-komandy-i-nastrojki/)
+### Шпаргалки
+**nmap**
 ```
+Доступные ip в подсети
+nmap -v -sn -n 172.18.200.0/24 -oG -
+```
+**ports**
+```
+netstat -tlnp
+```
+**Установленные пакеты**
+```
+rpm -qa|grep <packadge_name>
+```
+**rsync**
+```
+rsync --archive --verbose --progress <имя пользователя>@<ip адрес>:<путь к папке или файлу на серваке> <путь к файлу или папке на твоём серваке>
+```
+**scp**
+```
+$ scp user@remote.host:file.txt /some/local/directory
+$ scp file.txt user@remote.host:/some/remote/directory
+```
+**ssh web**
+```
+sudo vim ~/.bash_profile 
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+grafana_server()
+{
+        ssh p-pvk-perm-backup -L 3000:172.18.4.10:3000
+}
 
-### Jekyll Themes
+source ~/.bash_profile
+$ grafana_server
+localhost:3000
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Div-oops/mugivar/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```
+**nginx subPath kibana or grafana**
+```
+/etc/nginx/conf.d/name.conf
 
-### Support or Contact
+server {
+  listen 80;
+  server_name monitoring.ru;
+  root /usr/share/nginx/www;
+  index index.html index.htm;
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+  location /sed/grafana/ {
+        allow   85.26.168.125;
+#       deny    all;
+        proxy_pass http://localhost:3000/;
+  }
+
+  location /sed/kibana/ {
+        proxy_pass http://localhost:5601/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        rewrite ^/awesome/(.*)$ /$1 break;
+  }
+}
+
+/etc/kibana/kibana.yml
+
+server.basePath: "/sed/kibana"
+
+/etc/grafana/grafana.ini
+
+protocol = http
+domain = monitoring.ru
+root_url = %(protocol)s://%(domain)s/sed/grafana/
+
+```
+**Ansible vars**
+```
+CPU: ansible_processor_vcpus
+RAM: ansible_memtotal_mb
+{{ var (+, -, *, /) number }}
+```
+**Монтирование диска и создание разделов**
+```
+fdisk /dev/sdb
+pvcreate /dev/sdb1
+vgcreate monitoring /dev/sdb1
+lvcreate —name lv_monitoring   -l +100%FREE monitoring
+mkfs.xfs /dev/mapper/monitoring-lv_monitoring   
+mkdir /mnt/monitoring
+#/etc/fstab
+/dev/mapper/monitoring-lv_monitoring            /mnt/monitoring         xfs     defaults        0 0
+```
