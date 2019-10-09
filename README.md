@@ -1,4 +1,4 @@
-# [Home](https://div-oops.github.io/mugivar)    [Google](https://google.com)
+#                                          [Home](https://div-oops.github.io/mugivar)    
 [SQL](https://div-oops.github.io/mugivar/SQL/)
 
 **nmap**
