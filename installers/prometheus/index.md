@@ -55,3 +55,7 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl start prometheus
 ```
+**Что бы конфигурация вступила в силу**
+```
+prometheus -config.file “path/to/prometheus.yml”
+```
