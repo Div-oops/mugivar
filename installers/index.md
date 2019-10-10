@@ -1,1 +1,7 @@
 # [Home](https://div-oops.github.io/mugivar) [Installers](https://div-oops.github.io/mugivar/installers)
+## [Elasticsearch](https://div-oops.github.io/mugivar/installers/elasticsearch/)
+## [Kibana](https://div-oops.github.io/mugivar/installers/kibana/)
+## [Logstash](https://div-oops.github.io/mugivar/installers/logstash)
+## [Grafana](https://div-oops.github.io/mugivar/installers/grafana/)
+## [prometheus](https://div-oops.github.io/mugivar/installers/prometheus/)
+## [Node_exporter](https://div-oops.github.io/mugivar/installers/node-exporter/)
