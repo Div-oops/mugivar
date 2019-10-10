@@ -4,6 +4,19 @@ permalink: /index.html
 # [Home](https://div-oops.github.io/mugivar)  [Installers](https://div-oops.github.io/mugivar/installers)  
 [SQL](https://div-oops.github.io/mugivar/SQL/)
 
+
+```
+если вдруг кто-то встретит ошибку function public.mamonsu_count_wal_files() does not exist, то чинить надо вот так:
+CREATE OR REPLACE FUNCTION public.mamonsu_count_wal_files()
+RETURNS BIGINT AS $$
+WITH list(filename) as (SELECT * FROM pg_catalog.pg_ls_dir('pg_wal'))
+SELECT
+    COUNT(*)::BIGINT
+FROM
+    list
+WHERE filename not like 'archive_status'
+$$ LANGUAGE SQL SECURITY DEFINER;
+```
 **nmap**
 ```yml
 
