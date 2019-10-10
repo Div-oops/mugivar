@@ -20,3 +20,10 @@ sudo systemctl start grafana-server.service
 sudo systemctl enable grafana-server.service 
 
 ```
+## Dashboard
+```
+6742 PostgreSQL Statistics
+355 Postgres Overview
+878 Elasticsearch Dashboard
+3598 Elasticsearch Cluster - Indices
+```
