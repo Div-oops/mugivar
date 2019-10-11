@@ -4,6 +4,14 @@ permalink: /index.html
 # [Home](https://div-oops.github.io/mugivar)  [Installers](https://div-oops.github.io/mugivar/installers)  
 [SQL](https://div-oops.github.io/mugivar/SQL/)
 
+**ps**
+```
+ps afu | awk 'NR>1 {$5=int($5/1024)"M";}{ print;}'
+Это берет результат из psи затем для каждой строки, кроме первой, которая заменяет 5-й столбец, который обычно находится в КБ, в МБ, добавляя суффикс М.
+
+Вы можете сделать его псевдонимом и сохранить его в файле .bashrc, чтобы вы могли вызывать его как-то так:myps
+Модифицировано для ГБ и с 2 десятичными знаками (например 1.23GB):ps aux | awk '{$5=int(100 * $5/1024/1024)/100"GB";}{ print;}'
+```
 
 ```
 если вдруг кто-то встретит ошибку function public.mamonsu_count_wal_files() does not exist, то чинить надо вот так:
