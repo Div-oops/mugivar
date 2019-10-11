@@ -4,6 +4,13 @@ permalink: /index.html
 # [Home](https://div-oops.github.io/mugivar)  [Installers](https://div-oops.github.io/mugivar/installers)  
 [SQL](https://div-oops.github.io/mugivar/SQL/)
 
+**Monitoring IO**
+```
+sudo iotop -aoP
+atop
+nmon
+    n,d
+```
 **ps**
 ```
 ps afu | awk 'NR>1 {$5=int($5/1024)"M";}{ print;}'
