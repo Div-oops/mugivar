@@ -22,6 +22,7 @@ sudo systemctl enable grafana-server.service
 ```
 ## Dashboard
 ```
+1860 Node Exporter Full
 6742 PostgreSQL Statistics
 355 Postgres Overview
 878 Elasticsearch Dashboard
