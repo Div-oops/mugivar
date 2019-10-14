@@ -29,8 +29,8 @@ systemctl start  elasticsearch_exporter.service
     metrics_path: "/metrics"
     static_configs:
     - targets:
-      - elastic2.test.lan:9108
-      - elastic-log2.prod.lan:9108
+      - elastic2.test.lan:9114
+      - elastic-log2.prod.lan:9114
       labels:
         service: elasticsearch
 ```
