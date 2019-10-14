@@ -26,5 +26,6 @@ sudo systemctl enable grafana-server.service
 6742 PostgreSQL Statistics
 355 Postgres Overview
 2322 Elasticsearch
-2347 Elasticsearch Static
+2347 Elasticsearch Stats
+3254 Elasticsearch All
 ```
