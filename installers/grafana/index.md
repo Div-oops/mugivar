@@ -27,4 +27,5 @@ sudo systemctl enable grafana-server.service
 355 Postgres Overview
 878 Elasticsearch Dashboard
 3598 Elasticsearch Cluster - Indices
+2322 Elasticsearch
 ```
