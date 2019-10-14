@@ -28,4 +28,5 @@ sudo systemctl enable grafana-server.service
 2322 Elasticsearch
 2347 Elasticsearch Stats
 3254 Elasticsearch All
+3002 memory
 ```
