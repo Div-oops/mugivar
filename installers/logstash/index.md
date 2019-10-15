@@ -7,35 +7,41 @@ sudo systemctl enable logstash.service
 ```
 
 ```
-etc/logstash/conf.d/input.conf
+etc/logstash/conf.d/nginx_access.conf
 
 input {
-  beats {
-    port => 5044
-  }
-}
-
-/etc/logstash/conf.d/output.conf
-
-output {
-        elasticsearch {
-            hosts    => "localhost:9200"
-            index    => "nginx-%{+YYYY.MM.dd}"
-        }
-	#stdout { codec => rubydebug }
-}
-
-/etc/logstash/conf.d/filter.conf
+    beats {
+        port => "5044" } }
 
 filter {
- if [type] == "nginx_access" {
     grok {
-        match => { "message" => "%{IPORHOST:remote_ip} - %{DATA:user} \[%{HTTPDATE:access_time}\] \"%{WORD:http_method} %{DATA:url} HTTP/%{NUMBER:http_version}\" %{NUMBER:response_code} %{NUMBER:body_sent_bytes} \"%{DATA:referrer}\" \"%{DATA:agent}\"" }
+        match => [ "message" , "%{COMBINEDAPACHELOG}+%{GREEDYDATA:extra_fields}"]
+        overwrite => [ "message" ]
     }
-  }
-  date {
+    mutate {
+        convert => ["response", "integer"]
+        convert => ["bytes", "integer"]
+        convert => ["responsetime", "float"]
+    }
+    geoip {
+        source => "clientip"
+        target => "geoip"
+        add_tag => [ "nginx-geoip" ]
+    }
+    date {
         match => [ "timestamp" , "dd/MMM/YYYY:HH:mm:ss Z" ]
-  }
+        remove_field => [ "timestamp" ]
+    }
+    useragent {
+        source => "agent"
+    }
 }
 
+output {
+    elasticsearch {
+        hosts     => "localhost:9200"
+        index    => "nginx-access-%{+YYYY.MM.dd}"
+    }
+}
+#    stdout { codec => rubydebug }}
 ```
