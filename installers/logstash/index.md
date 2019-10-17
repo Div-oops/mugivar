@@ -15,7 +15,6 @@ input {
 
 filter {
     grok {
-        break_on_match => false
         match => {
         "message" => [
                 "%{IPORHOST:[nginx_json][remote_ip]} - %{DATA:[nginx_json][user_name]} \[%{HTTPDATE:[nginx_json][access_time]}\] \"%{DATA:[nginx_json][request]}\" %{NUMBER:[nginx_json][status]} %{NUMBER:[nginx_json][body_bytes_sent]} \"%{DATA:[nginx_json][http_referrer]}\" \"%{DATA:[nginx_json][http_user_agent]}\"",
