@@ -1,5 +1,6 @@
 # [Home](https://div-oops.github.io/mugivar) [Installers](https://div-oops.github.io/mugivar/installers)
 Debager grok https://grokdebug.herokuapp.com/
+Grok https://github.com/logstash-plugins/logstash-patterns-core/blob/master/patterns/grok-patterns
 ```
 sudo yum install logstash-7.1.1
 ```
