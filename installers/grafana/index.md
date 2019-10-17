@@ -30,3 +30,7 @@ sudo systemctl enable grafana-server.service
 3254 Elasticsearch All
 3002 memory
 ```
+### Plagins
+```
+grafana-cli plugins install grafana-piechart-panel
+```
