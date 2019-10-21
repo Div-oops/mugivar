@@ -17,41 +17,33 @@ input {
 
 filter {
     grok {
+        break_on_match => false
         match => {
         "message" => [
                 "%{IPORHOST:[nginx_json][remote_ip]} - %{DATA:[nginx_json][user_name]} \[%{HTTPDATE:[nginx_json][access_time]}\] \"%{DATA:[nginx_json][request]}\" %{NUMBER:[nginx_json][status]} %{NUMBER:[nginx_json][body_bytes_sent]} \"%{DATA:[nginx_json][http_referrer]}\" \"%{DATA:[nginx_json][http_user_agent]}\"",
                 "%{IPORHOST} - %{DATA} \[%{HTTPDATE}\] \"%{WORD:[nginx_json][request_method]} %{DATA:[nginx_json][url]} HTTP/%{NUMBER:[nginx_json][http_version]}\" %{NUMBER} %{NUMBER} \"%{WORD}://%{DATA:[nginx_json][host]}\/%{DATA}\" \"%{DATA} \(%{DATA:[nginx_json][http_user_agent_parsed][os]} %{DATA}\) %{DATA}\) %{DATA:[nginx_json][http_user_agent_parsed][name]}\/%{DATA:[nginx_json][http_user_agent_parsed][major]}\.%{DATA:[nginx_json][http_user_agent_parsed][minor]}\.%{DATA:[nginx_json][http_user_agent_parsed][path]}\.%{DATA}"
         ]
+         break_on_match => false
         }
         remove_tag => [ "_grokparsefailure" ]
         add_tag => [ "nginx_access" ]
     }
-    mutate {
-        convert => ["response", "integer"]
-        convert => ["bytes", "integer"]
-        convert => ["responsetime", "float"]
-    }
-    geoip {
-        source => "clientip"
-        target => "geoip"
-        add_tag => [ "nginx-geoip" ]
-    }
     date {
-        match => [ "timestamp" , "dd/MMM/YYYY:HH:mm:ss Z" ]
-        remove_field => [ "timestamp" ]
+        match => [ "[nginx_json][access_time]" , "dd/MMM/YYYY:HH:mm:ss Z" ]
     }
-    useragent {
-        source => "user_agent"
+    prune {
+        whitelist_names => ["timestamp", "host", "nginx_json", "http_user_agent_parsed", "tags", "log"]
     }
 }
 
 output {
     elasticsearch {
-        hosts     => "172.18.200.230:9200"
+        hosts     => "localhost:9200"
         index    => "nginx-access-%{+YYYY.MM.dd}"
     }
 } 
 #    stdout { codec => rubydebug }}
+
 
 ```
 ERROR
