@@ -1,0 +1,36 @@
+grafcli резервное копирование дашбордов grafana
+Установка
+```
+pip3 install grafcli
+```
+```
+[grafcli]
+editor = vim
+verbose = off
+
+[hosts]
+$GRAFANA_URL = on
+
+[$GRAFANA_URL]
+type = api
+url = https://$GRAFANA_URL:$PORT
+ssl = on
+user = admin
+password = $GRAFANA_ADMIN_PASSWORD
+#token = $GRAFANA_TOKEN
+
+[resources]
+data-dir = ~/.grafcli
+```
+Проверка
+```
+grafcli ls remote
+```
+Создание бекапа
+```
+grafcli backup remote/$GRAFANA_URL/ backup.tgz
+```
+экспорт бекапа
+```
+grafcli restore backup.tgz remote/$GRAFANA_URL/
+```
