@@ -55,3 +55,8 @@ ERROR
         source => "user_agent"
     }
 ```
+###Проверка конфига
+```
+cd /usr/share/logstahs
+bin/logstash -f /etc/logstash/conf.d/nginx-access.conf -t
+```
